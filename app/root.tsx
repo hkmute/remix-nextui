@@ -19,6 +19,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const handleNavigate = (path: string) => {
     console.log("this is undefined", path);
+    alert(path);
     navigate(path);
   };
 
