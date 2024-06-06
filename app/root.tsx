@@ -1,12 +1,27 @@
+import { NextUIProvider } from "@nextui-org/react";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigate,
 } from "@remix-run/react";
+import type { LinksFunction } from "@remix-run/node";
+import stylesheet from "~/tailwind.css?url";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    console.log("this is undefined", path);
+    navigate(path);
+  };
+
   return (
     <html lang="en">
       <head>
@@ -16,7 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <NextUIProvider navigate={handleNavigate}>{children}</NextUIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
